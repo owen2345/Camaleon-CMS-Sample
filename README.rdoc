@@ -1,28 +1,21 @@
-== README
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/owen2345/camaleon-cms)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![](http://camaleon.tuzitio.com/media/132/logo2.png)
 
-Things you may want to cover:
+# Requirements
+* Rails 4+
+* MySQL 5+ or Sqlite or PostgreSQL
+* Ruby 1.9.3+
+* Imagemagick
 
-* Ruby version
+# Camaleon CMS (THIS IS A SAMPLE)
+Camaleon CMS is a dynamic and advanced content management system based on Ruby on Rails 4 and Ruby 1.9.3+. 
 
-* System dependencies
+Camaleon CMS is an alternative to wordpress for Ruby on Rails developers.
 
-* Configuration
+Camaleon CMS is a flexible manager where you can build your content structure without coding anything by custom fields and custom contents type.
 
-* Database creation
+## Camaleon CMS is FREE and Open source
+released on July, 2015 and tested previously with more than 20 projects by 6 months.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+![](http://camaleon.tuzitio.com/media/132/multi-language.png)
