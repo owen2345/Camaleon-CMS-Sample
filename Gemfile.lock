@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/owen2345/camaleon-cms-gem.git
-  revision: 097b0649800ca427732cc30b2bbcb42ec8a3c651
+  revision: c2349edff748a487369172d7ec2a2df0591206b8
   specs:
     camaleon_cms (0.0.1)
 
@@ -20,6 +20,8 @@ GEM
       rack-test (~> 0.6.2)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    actionpack-page_caching (1.0.2)
+      actionpack (>= 4.0.0, < 5)
     actionview (4.2.3)
       activesupport (= 4.2.3)
       builder (~> 3.1)
@@ -43,11 +45,13 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.3)
+    bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
+    cancancan (1.12.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -57,11 +61,20 @@ GEM
     coffee-script-source (1.9.1.1)
     columnize (0.9.0)
     debug_inspector (0.0.2)
+    draper (1.4.0)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0)
+    dynamic_sitemaps (2.0.0)
+    el_finder (1.1.12)
+      image_size (>= 1.0.0)
     erubis (2.7.0)
     execjs (2.6.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
+    image_size (1.4.1)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -74,13 +87,22 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    meta-tags (2.0.0)
+      actionpack (>= 3.0.0)
     mime-types (2.6.1)
+    mini_magick (4.2.10)
     mini_portile (0.6.2)
     minitest (5.8.0)
+    mobu (0.0.3)
+      actionpack (>= 3.2)
+      activesupport (>= 3.2)
+      rack (~> 1.4)
     multi_json (1.11.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     pg (0.18.2)
+    protected_attributes (1.1.3)
+      activemodel (>= 4.0.1, < 5.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -110,6 +132,8 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
+    request_store (1.2.0)
+    rufus-scheduler (3.1.3)
     sass (3.4.16)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -142,24 +166,41 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    will_paginate (3.0.7)
+    will_paginate-bootstrap (1.0.1)
+      will_paginate (>= 3.0.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionpack-page_caching
+  bcrypt
   byebug
   camaleon_cms!
+  cancancan (~> 1.10)
   coffee-rails (~> 4.1.0)
+  draper (~> 1.3)
+  dynamic_sitemaps
+  el_finder
   jbuilder (~> 2.0)
   jquery-rails
+  meta-tags
+  mini_magick
+  mobu
+  nokogiri
   pg
+  protected_attributes
   rails (= 4.2.3)
+  rufus-scheduler (~> 3.1.1)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
+  will_paginate
+  will_paginate-bootstrap
 
 BUNDLED WITH
    1.10.6

@@ -45,3 +45,8 @@ end
 
 gem 'camaleon_cms', :git => 'https://github.com/owen2345/camaleon-cms-gem.git'
 
+
+
+#################### Camaleon CMS include all gems for plugins and themes #################### 
+require './lib/plugin_routes' 
+instance_eval(PluginRoutes.draw_gems)
