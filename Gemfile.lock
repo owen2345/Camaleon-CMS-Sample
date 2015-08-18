@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/owen2345/camaleon-cms-gem.git
-  revision: 5eac64c829995c8790c5d27353b70068b479870b
+  revision: a00055a8da59bea0365c4606ebcec3a4a0675b42
   specs:
     camaleon_cms (0.0.1)
 
@@ -49,8 +49,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
-    byebug (5.0.0)
-      columnize (= 0.9.0)
+    byebug (6.0.0)
     cancancan (1.12.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -59,7 +58,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
-    columnize (0.9.0)
     debug_inspector (0.0.2)
     draper (1.4.0)
       actionpack (>= 3.0)
@@ -83,7 +81,7 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
-    loofah (2.0.2)
+    loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
@@ -188,7 +186,6 @@ DEPENDENCIES
   meta-tags
   mini_magick
   mobu
-  nokogiri
   pg
   protected_attributes
   rails (= 4.2.3)
