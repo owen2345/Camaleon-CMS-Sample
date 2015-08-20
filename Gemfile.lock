@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/owen2345/camaleon-cms-gem.git
-  revision: a00055a8da59bea0365c4606ebcec3a4a0675b42
+  revision: 326b0ad72edcc80a2089dbe276a69bee2dd610ad
   specs:
     camaleon_cms (0.0.1)
 
@@ -49,7 +49,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
-    byebug (6.0.0)
+    byebug (6.0.1)
     cancancan (1.12.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -143,7 +143,7 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     spring (1.3.6)
-    sprockets (3.3.1)
+    sprockets (3.3.2)
       rack (~> 1.0)
     sprockets-rails (2.3.2)
       actionpack (>= 3.0)
