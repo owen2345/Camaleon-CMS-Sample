@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/owen2345/camaleon-cms-gem.git
-  revision: 8971be692acf511c2bc1685ae2abd572de31f3d4
+  revision: 54429f44c74818f69276327887f0de6f105664ad
   specs:
     camaleon_cms (0.0.1)
 

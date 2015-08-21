@@ -246,7 +246,7 @@ class PluginRoutes
 
   # return all plugins located in cms and in this project
   def self.all_plugins
-    r = cache_variable("all_plugins"); return r unless r.nil?
+    r = cache_variable("all_plugins"); return r unless (r.nil? || r == [])
     res = []
     entries = [".", ".."]
     (Dir["#{apps_dir}/plugins/*"] + (defined?($camaleon_engine_dir) ? Dir["#{$camaleon_engine_dir}/app/apps/plugins/*"] : [])).each do |path|
@@ -265,7 +265,7 @@ class PluginRoutes
 
   # return an array of all themes installed for all sites
   def self.all_themes
-    r = cache_variable("all_themes"); return r unless r.nil?
+    r = cache_variable("all_themes"); return r unless (r.nil? || r == [])
     res = []
     entries = [".", ".."]
     (Dir["#{apps_dir}/themes/*"] + (defined?($camaleon_engine_dir) ? Dir["#{$camaleon_engine_dir}/app/apps/themes/*"] : [])).each do |path|
