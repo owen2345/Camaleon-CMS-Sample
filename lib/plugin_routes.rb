@@ -1,4 +1,5 @@
 require 'json'
+require 'active_support/core_ext/hash/indifferent_access'
 class PluginRoutes
   @@_vars = []
   # load plugin routes if it is enabled
@@ -64,27 +65,15 @@ class PluginRoutes
 
   # return plugin information
   def self.plugin_info(plugin_key)
-    return nil if plugin_key.start_with?(".") || !File.exist?(File.join(apps_dir, "plugins", plugin_key, "config", "config.json"))
-    r = cache_variable("plugin_#{plugin_key}"); return r unless r.nil?
-    res = JSON.parse(File.read(File.join(apps_dir, "plugins", plugin_key, "config", "config.json"))).with_indifferent_access
-    res["key"] = plugin_key
-    res["path"] = File.join(apps_dir, "plugins", plugin_key).to_s
-    res["kind"] = "plugin"
-    cache_variable("plugin_#{plugin_key}", res)
+    self.all_plugins.each{|p| return p if p[:key] == plugin_key }
+    nil
   end
 
   # return theme information
   # if theme_name is nil, the use current site theme
   def self.theme_info(theme_name)
-    return nil if theme_name.start_with?(".") || !File.exist?(File.join(apps_dir, "themes", theme_name, "config", "config.json"))
-    r = cache_variable("theme_#{theme_name}"); return r unless r.nil?
-    dir = apps_dir
-    res = JSON.parse(File.read(File.join(dir, "themes", theme_name, "config", "config.json"))).with_indifferent_access
-    res["key"] = theme_name
-    res["path"] = File.join(dir, "themes", theme_name).to_s
-    res["kind"] = "theme"
-    res["title"] = res["name"]
-    cache_variable("theme_#{theme_name}", res)
+    self.all_themes.each{|p| return p if p[:key] == theme_name }
+    nil
   end
 
   # return system information
@@ -241,21 +230,9 @@ class PluginRoutes
       gem_file = File.join(apps_dir, "..", "..", "lib", "Gemfile_camaleon")
       res << File.read(gem_file).gsub("source 'https://rubygems.org'", "") if File.exist?(gem_file)
     end
-
-    p_dir = File.join(apps_dir, "plugins")
-    if Dir.exist?(p_dir)
-      Dir.entries(p_dir).select do |entry|
-        f = File.join(apps_dir, "plugins", entry, "config", "Gemfile")
-        res << File.read(f) if File.exist?(f)
-      end
-    end
-
-    t_dir = File.join(apps_dir, "themes")
-    if Dir.exist?(t_dir)
-      Dir.entries(t_dir).select do |entry|
-        f = File.join(apps_dir, "themes", entry, "config", "Gemfile")
-        res << File.read(f) if File.exist?(f)
-      end
+    (self.all_themes + self.all_plugins).each do |item|
+      f = File.join(item["path"], "config", "Gemfile")
+      res << File.read(f) if File.exist?(f)
     end
     res.join("\n")
   end
@@ -267,32 +244,46 @@ class PluginRoutes
     dir.join("/")+ '/app/apps'
   end
 
+  # return all plugins located in cms and in this project
   def self.all_plugins
     r = cache_variable("all_plugins"); return r unless r.nil?
     res = []
-    p_dir = File.join(apps_dir, "plugins")
-    if Dir.exist?(p_dir)
-      Dir.entries(p_dir).select do |entry|
-        i = plugin_info(entry)
-        res << i unless i.nil?
-      end
+    entries = [".", ".."]
+    (Dir["#{apps_dir}/plugins/*"] + (defined?($camaleon_engine_dir) ? Dir["#{$camaleon_engine_dir}/app/apps/plugins/*"] : [])).each do |path|
+      entry = path.split("/").last
+      config = File.join(path, "config", "config.json")
+      next if entries.include?(entry) || !File.directory?(path) || !File.exist?(config)
+      p = JSON.parse(File.read(config)).with_indifferent_access
+      p["key"] = entry
+      p["path"] = path
+      p["kind"] = "plugin"
+      res << p
+      entries << entry
     end
     cache_variable("all_plugins", res)
   end
 
+  # return an array of all themes installed for all sites
   def self.all_themes
     r = cache_variable("all_themes"); return r unless r.nil?
     res = []
-    t_dir = File.join(apps_dir, "themes")
-    if Dir.exist?(t_dir)
-      Dir.entries(t_dir).select do |entry|
-        i = theme_info(entry)
-        res << i unless i.nil?
-      end
+    entries = [".", ".."]
+    (Dir["#{apps_dir}/themes/*"] + (defined?($camaleon_engine_dir) ? Dir["#{$camaleon_engine_dir}/app/apps/themes/*"] : [])).each do |path|
+      entry = path.split("/").last
+      config = File.join(path, "config", "config.json")
+      next if entries.include?(entry) || !File.directory?(path) || !File.exist?(config)
+      p = JSON.parse(File.read(config)).with_indifferent_access
+      p["key"] = entry
+      p["path"] = path
+      p["kind"] = "theme"
+      p["title"] = p["name"]
+      res << p
+      entries << entry
     end
     cache_variable("all_themes", res)
   end
 
+  # return all apps loaded
   def self.all_apps
     all_plugins+all_themes
   end
