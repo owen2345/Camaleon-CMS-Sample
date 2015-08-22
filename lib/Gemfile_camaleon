@@ -18,8 +18,8 @@ gem 'actionpack-page_caching' # page caching
 gem 'mobu' # mobile detect
 
 # fix for windows users
-# group :development do
-#   gem 'thin', platforms: [:mingw, :mswin]
-#   gem 'tzinfo-data', platforms: [:mingw, :mswin]
-# end
+group :development do
+  gem 'thin', platforms: [:mingw, :mswin]
+  gem 'tzinfo-data', platforms: [:mingw, :mswin]
+end
 ##################### END CUSTOM GEMS ######################

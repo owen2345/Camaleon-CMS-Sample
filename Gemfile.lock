@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/owen2345/camaleon-cms-gem.git
-  revision: 54429f44c74818f69276327887f0de6f105664ad
+  revision: af38daa6e0a51be2b771d5ad79d8a9f4160ad3b7
   specs:
     camaleon_cms (0.0.1)
 
@@ -178,7 +178,7 @@ GEM
     rdoc (4.2.0)
     request_store (1.2.0)
     rufus-scheduler (3.1.3)
-    sass (3.4.16)
+    sass (3.4.17)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
@@ -191,7 +191,7 @@ GEM
     sort_alphabetical (1.0.2)
       unicode_utils (>= 1.2.2)
     spring (1.3.6)
-    sprockets (3.3.2)
+    sprockets (3.3.3)
       rack (~> 1.0)
     sprockets-rails (2.3.2)
       actionpack (>= 3.0)
@@ -249,7 +249,9 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
+  thin
   turbolinks
+  tzinfo-data
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
   will_paginate
