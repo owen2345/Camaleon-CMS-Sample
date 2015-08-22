@@ -1,5 +1,4 @@
 require 'json'
-require 'active_support/core_ext/hash/indifferent_access'
 class PluginRoutes
   @@_vars = []
   # load plugin routes if it is enabled
@@ -65,14 +64,14 @@ class PluginRoutes
 
   # return plugin information
   def self.plugin_info(plugin_key)
-    self.all_plugins.each{|p| return p if p[:key] == plugin_key }
+    self.all_plugins.each{|p| return p if p["key"] == plugin_key }
     nil
   end
 
   # return theme information
   # if theme_name is nil, the use current site theme
   def self.theme_info(theme_name)
-    self.all_themes.each{|p| return p if p[:key] == theme_name }
+    self.all_themes.each{|p| return p if p["key"] == theme_name }
     nil
   end
 
@@ -86,8 +85,8 @@ class PluginRoutes
     res["key"] = "system"
     res["path"] = ''
     res["kind"] = "system"
-    res[:hooks] = {} unless res[:hooks].present?
-    res[:hooks][:on_notification] = (res[:hooks][:on_notification] || []) + ["admin_system_notifications"]
+    res["hooks"] = {} unless res["hooks"].present?
+    res["hooks"]["on_notification"] = (res["hooks"]["on_notification"] || []) + ["admin_system_notifications"]
     cache_variable("system_info", res)
   end
 
@@ -117,7 +116,7 @@ class PluginRoutes
     all_plugins.each do |plugin|
       res << plugin if enabled_ps.include?(plugin["key"])
     end
-    res = res.sort_by{|e| e[:position] || 10 }
+    res = res.sort_by{|e| e["position"] || 10 }
     cache_variable("enable_plugins_site_#{site.id}", res)
   end
 
@@ -253,7 +252,8 @@ class PluginRoutes
       entry = path.split("/").last
       config = File.join(path, "config", "config.json")
       next if entries.include?(entry) || !File.directory?(path) || !File.exist?(config)
-      p = JSON.parse(File.read(config)).with_indifferent_access
+      p = JSON.parse(File.read(config))
+      p = p.with_indifferent_access rescue p
       p["key"] = entry
       p["path"] = path
       p["kind"] = "plugin"
@@ -272,7 +272,8 @@ class PluginRoutes
       entry = path.split("/").last
       config = File.join(path, "config", "config.json")
       next if entries.include?(entry) || !File.directory?(path) || !File.exist?(config)
-      p = JSON.parse(File.read(config)).with_indifferent_access
+      p = JSON.parse(File.read(config))
+      p = p.with_indifferent_access rescue p
       p["key"] = entry
       p["path"] = path
       p["kind"] = "theme"

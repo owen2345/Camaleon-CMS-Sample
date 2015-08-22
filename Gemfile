@@ -43,8 +43,7 @@ group :development, :test do
   gem 'spring'
 end
 
-# gem 'camaleon_cms', :git => 'https://github.com/owen2345/camaleon-cms-gem.git'
-gem 'camaleon_cms', '~> 0.0.2'
+gem 'camaleon_cms', :git => 'https://github.com/owen2345/camaleon-cms-gem.git'
 
 
 #################### Camaleon CMS include all gems for plugins and themes #################### 
