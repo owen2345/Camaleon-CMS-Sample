@@ -23,3 +23,9 @@ group :development do
   gem 'tzinfo-data', platforms: [:mingw, :mswin]
 end
 ##################### END CUSTOM GEMS ######################
+#payments
+gem 'activemerchant'
+# select countries
+gem 'country_select'
+gem 'deep_cloneable', '~> 2.0.0' # clone models
+#social login
