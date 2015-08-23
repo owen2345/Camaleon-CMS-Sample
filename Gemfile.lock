@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/owen2345/camaleon-cms-gem.git
-  revision: dae5539bf26dffbd1d541634b1b007b190aa15b0
-  specs:
-    camaleon_cms (0.0.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -55,6 +49,7 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (6.0.2)
+    camaleon_cms (0.0.2)
     cancancan (1.12.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -225,7 +220,7 @@ DEPENDENCIES
   activemerchant
   bcrypt
   byebug
-  camaleon_cms!
+  camaleon_cms (~> 0.0.2)
   cancancan (~> 1.10)
   coffee-rails (~> 4.1.0)
   country_select
