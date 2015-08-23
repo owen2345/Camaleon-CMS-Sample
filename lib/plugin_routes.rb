@@ -77,9 +77,12 @@ class PluginRoutes
 
   # return system information
   def self.system_info
+    camaleon_gem = get_gem('camaleon_cms')
+    return {} if !camaleon_gem
     r = cache_variable("system_info");  return r unless r.nil?
     res = {}
-    res = JSON.parse(File.read(File.join($camaleon_engine_dir, "config", "system.json"))).with_indifferent_access if $camaleon_engine_dir.present?
+    res = JSON.parse(File.read(File.join(camaleon_gem.gem_dir, "config", "system.json")))
+    res = res.with_indifferent_access rescue res
     return cache_variable("system_info", res) unless File.exist?(system_file = File.join(apps_dir, "..", '..', "config", "system.json"))
     res = res.merge(JSON.parse(File.read(system_file)).with_indifferent_access).with_indifferent_access
     res["key"] = "system"
@@ -223,11 +226,12 @@ class PluginRoutes
   def self.draw_gems
     res = []
     # recovering gem dependencies
-    if camaleon_gem = get_gem('camaleon')
-      res << File.read(File.join(camaleon_gem.gem_dir, "Gemfile")).gsub("source 'https://rubygems.org'", "")
+    if camaleon_gem = get_gem('camaleon_cms')
+      res << File.read(File.join(camaleon_gem.gem_dir, "lib", "Gemfile")).gsub("source 'https://rubygems.org'", "")
     else
-      gem_file = File.join(apps_dir, "..", "..", "lib", "Gemfile_camaleon")
-      res << File.read(gem_file).gsub("source 'https://rubygems.org'", "") if File.exist?(gem_file)
+      puts "****************** You need to install camaleon_cms gem. *****************"
+      puts "****************** Please installation manual *********************"
+      return ""
     end
     (self.all_themes + self.all_plugins).each do |item|
       f = File.join(item["path"], "config", "Gemfile")
@@ -245,10 +249,12 @@ class PluginRoutes
 
   # return all plugins located in cms and in this project
   def self.all_plugins
+    camaleon_gem = get_gem('camaleon_cms')
+    return [] if !camaleon_gem
     r = cache_variable("all_plugins"); return r unless (r.nil? || r == [])
     res = []
     entries = [".", ".."]
-    (Dir["#{apps_dir}/plugins/*"] + (defined?($camaleon_engine_dir) ? Dir["#{$camaleon_engine_dir}/app/apps/plugins/*"] : [])).each do |path|
+    (Dir["#{apps_dir}/plugins/*"] + Dir["#{camaleon_gem.gem_dir}/app/apps/plugins/*"]).each do |path|
       entry = path.split("/").last
       config = File.join(path, "config", "config.json")
       next if entries.include?(entry) || !File.directory?(path) || !File.exist?(config)
@@ -265,10 +271,12 @@ class PluginRoutes
 
   # return an array of all themes installed for all sites
   def self.all_themes
+    camaleon_gem = get_gem('camaleon_cms')
+    return [] if !camaleon_gem
     r = cache_variable("all_themes"); return r unless (r.nil? || r == [])
     res = []
     entries = [".", ".."]
-    (Dir["#{apps_dir}/themes/*"] + (defined?($camaleon_engine_dir) ? Dir["#{$camaleon_engine_dir}/app/apps/themes/*"] : [])).each do |path|
+    (Dir["#{apps_dir}/themes/*"] + Dir["#{camaleon_gem.gem_dir}/app/apps/themes/*"]).each do |path|
       entry = path.split("/").last
       config = File.join(path, "config", "config.json")
       next if entries.include?(entry) || !File.directory?(path) || !File.exist?(config)
