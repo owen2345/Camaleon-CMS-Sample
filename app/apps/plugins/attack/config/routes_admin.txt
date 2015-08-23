@@ -1,2 +1,0 @@
-get 'settings' => "admin#settings"
-post "settings" => "admin#save_settings"
