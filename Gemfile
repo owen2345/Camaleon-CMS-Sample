@@ -44,7 +44,7 @@ group :development, :test do
 end
 
 # gem 'camaleon_cms', :git => 'https://github.com/owen2345/camaleon-cms-gem.git'
-gem 'camaleon_cms', '~> 0.1.0'
+gem 'camaleon_cms', '~> 0.1.1'
 
 
 #################### Camaleon CMS include all gems for plugins and themes #################### 
