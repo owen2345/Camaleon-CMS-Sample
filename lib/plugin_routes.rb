@@ -226,7 +226,7 @@ class PluginRoutes
   def self.draw_gems
     res = []
     # recovering gem dependencies
-    if camaleon_gem = get_gem('camaleon_cms')
+    if camaleon_gem = get_gem('camaleon_cms') && false
       res << File.read(File.join(camaleon_gem.gem_dir, "lib", "Gemfile")).gsub("source 'https://rubygems.org'", "")
     else
       gem_file = File.join(apps_dir, "..", "..", "lib", "Gemfile_camaleon")
