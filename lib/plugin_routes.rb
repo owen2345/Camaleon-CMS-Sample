@@ -225,19 +225,20 @@ class PluginRoutes
   # draw "all" gems registered for the plugins or themes and camaleon gems
   def self.draw_gems
     res = []
+    gem_file = File.join(apps_dir, "..", "..", "lib", "Gemfile_camaleon")
     # recovering gem dependencies
-    if camaleon_gem = get_gem('camaleon_cms') && false
+    if camaleon_gem = get_gem('camaleon_cms')
       res << File.read(File.join(camaleon_gem.gem_dir, "lib", "Gemfile")).gsub("source 'https://rubygems.org'", "")
     else
-      gem_file = File.join(apps_dir, "..", "..", "lib", "Gemfile_camaleon")
-      puts "***************** exist file: #{File.exist?(gem_file)}"
+      puts "You need to install camaleon_cms gem."
       res << File.read(gem_file).gsub("source 'https://rubygems.org'", "") if File.exist?(gem_file)
+      # return ""
     end
-    puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@: #{res.inspect}"
     (self.all_themes + self.all_plugins).each do |item|
       f = File.join(item["path"], "config", "Gemfile")
       res << File.read(f) if File.exist?(f)
     end
+    File.write(gem_file, res.join("\n")) if camaleon_gem = get_gem('camaleon_cms')
     res.join("\n")
   end
 
