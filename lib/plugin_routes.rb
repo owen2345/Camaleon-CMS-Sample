@@ -230,8 +230,8 @@ class PluginRoutes
       res << File.read(File.join(camaleon_gem.gem_dir, "lib", "Gemfile")).gsub("source 'https://rubygems.org'", "")
     else
       puts "****************** You need to install camaleon_cms gem. *****************"
-      puts "****************** Please installation manual *********************"
-      return ""
+      gem_file = File.join(apps_dir, "..", "..", "lib", "Gemfile_camaleon")
+      res << File.read(gem_file).gsub("source 'https://rubygems.org'", "") if File.exist?(gem_file)
     end
     (self.all_themes + self.all_plugins).each do |item|
       f = File.join(item["path"], "config", "Gemfile")
