@@ -30,12 +30,7 @@ class Plugins::ExportContent::AdminController < Apps::PluginsAdminController
     end
 
     obj[:plugins] = {}
-    if current_site.plugin_installed?('slider_basic') && params[:data][:slider_basic].present?
-      obj[:plugins][:slider_basics] = JSON.parse(current_site.slider_basics.to_json(:include => [obj_group, :field_values]))
-    end
-
     obj[:nav_menus] = JSON.parse(current_site.nav_menus.to_json(:include => [{:children => {:methods => [:children_all], :include => [:metas]}}])) if params[:data][:nav_menus].present?
-
     obj[:themes] = JSON.parse(current_theme.to_json(:include => [:metas, obj_group, :field_values])) if params[:data][:themes].present?
     r = {obj: obj}; hooks_run("on_export",r); obj = r[:obj];
     if params[:data][:show_json].present?
