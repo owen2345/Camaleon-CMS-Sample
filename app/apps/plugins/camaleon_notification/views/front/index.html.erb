@@ -1,0 +1,6 @@
+<% message = @plugin.get_meta("version-#{params[:version]}").to_s.translate(params[:admin_locale]) %>
+<% if message.present? %>
+    <div class="alert alert-info">
+        <%= message %>
+    </div>
+<% end %>

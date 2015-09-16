@@ -97,7 +97,7 @@
   var upload_success_selected_items= '<%= t('plugin.export_content.message.upload_success_selected_items')%>';
   var error_server_importing = '<%= t('plugin.export_content.message.error_server_importing')%>';
   var completed = '<%= t('plugin.export_content.button.completed')%>';
-  var plugins_installed = <%= raw Hash[*PluginRoutes.enabled_plugins(current_site).map{|item| [item["key"], item["title"]] }.flatten].to_json %>;
+  var plugins_installed = <%= raw Hash[*PluginRoutes.enabled_plugins(current_site).map{|item| [item[:key], item[:title]] }.flatten].to_json %>;
 
   var param_file = "<%= params[:file] %>";
   var url_file = null;

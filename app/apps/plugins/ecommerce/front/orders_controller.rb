@@ -10,11 +10,14 @@ class Plugins::Ecommerce::Front::OrdersController < Plugins::Ecommerce::FrontCon
 
 
   def index
+    @ecommerce_bredcrumb << ["Orders"]
     @orders = current_site.orders.set_user(current_user).all
   end
 
   def show
     @order = current_site.orders.find_by_slug(params[:order]).decorate
+    @ecommerce_bredcrumb << ["Orders", url_for(action: :index)]
+    @ecommerce_bredcrumb << ["Detail Order: #{params[:order]}"]
   end
 
   def res_coupon
@@ -22,7 +25,7 @@ class Plugins::Ecommerce::Front::OrdersController < Plugins::Ecommerce::FrontCon
     error = false
     if coupon.nil?
       error = 'Not Found Coupon'
-    elsif "#{coupon.options[:expirate_date]} 23:59:59".to_datetime.to_i < Time.now.to_i
+    elsif "#{coupon.options[:expirate_date]} 23:59:59".to_time.to_i < Time.now.to_i
       error = 'Coupon Expired'
     elsif coupon.status != '1'
       error = 'Coupon not active'
@@ -31,7 +34,7 @@ class Plugins::Ecommerce::Front::OrdersController < Plugins::Ecommerce::FrontCon
       render json: {error: error}
     else
       coupon = coupon.decorate
-      render json: { data: {text: "#{coupon.the_amount}", options: coupon.options, code: coupon.slug} }
+      render json: { data: {text: "#{coupon.the_amount}", options: coupon.options, code: coupon.slug, current_unit: current_site.current_unit} }
     end
   end
 
@@ -43,7 +46,8 @@ class Plugins::Ecommerce::Front::OrdersController < Plugins::Ecommerce::FrontCon
       flash[:notice] = "Canceled Order"
       redirect_to action: :index
     end
-
+    @ecommerce_bredcrumb << ["Orders", url_for(action: :index)]
+    @ecommerce_bredcrumb << ["Payment Order: #{params[:order]}"]
   end
 
   def set_select_payment
@@ -54,13 +58,16 @@ class Plugins::Ecommerce::Front::OrdersController < Plugins::Ecommerce::FrontCon
 
   def pay
     @order = current_site.orders.find_by_slug(params[:order])
+    @ecommerce_bredcrumb << ["Orders", url_for(action: :index)]
     if @order.meta[:payment][:type] == 'paypal'
       pay_by_paypal
     elsif @order.meta[:payment][:type] == 'credit_card'
       @payment_methods = current_site.payment_methods.find(@order.meta[:payment][:payment_id])
+      @ecommerce_bredcrumb << ["Payment by Credit Card"]
       render 'pay_by_credit_card'
     else
       @payment_methods = current_site.payment_methods.find(@order.meta[:payment][:payment_id])
+      @ecommerce_bredcrumb << ["Payment by Bank Transfer"]
       render 'pay_by_bank_transfer'
     end
   end

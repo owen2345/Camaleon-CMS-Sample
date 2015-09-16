@@ -49,17 +49,28 @@
       <%= current_unit %> <%= order.meta[:payment][:tax_total] %>
     </td>
   </tr>
+
+
   <tr>
     <td colspan="2"></td>
     <td colspan="2" class="text-right"><%= t('plugin.ecommerce.table.shipping') %></td>
     <td id="shipping_total"><%= current_unit %> <span><%= order.meta[:payment][:weight_price] %></span></td>
   </tr>
+
+  <tr>
+    <td colspan="2"></td>
+    <td colspan="2" class="text-right">Sub <%= t('plugin.ecommerce.table.total') %></td>
+    <td id="order_total">
+
+      <%= current_unit %> <span><%= order.meta[:payment][:total] %></span></td>
+  </tr>
+
   <% if order.meta[:payment][:coupon_amount].to_i > 0 %>
       <tr id="coupon_application_row" >
         <td colspan="2"></td>
         <td colspan="2" class="text-right"><%= t('plugin.ecommerce.table.discount') %></td>
         <td class="extra_totals reduce_tax_subtotal" id="coupon_application_total">
-          <%= current_unit %> <span><%= order.meta[:payment][:coupon_amount] %></span>
+          - <%= current_unit %> <span><%= order.meta[:payment][:coupon_amount] %></span> <strong>(<%= order.meta[:payment][:coupon] %>)</strong>
         </td>
       </tr>
   <% end  %>
@@ -68,7 +79,7 @@
     <td colspan="2" class="text-right"><%= t('plugin.ecommerce.table.total') %></td>
     <td id="order_total">
 
-      <%= current_unit %> <span><%= order.meta[:payment][:total] %></span></td>
+      <%= current_unit %> <span><%= order.meta[:payment][:amount] %></span></td>
   </tr>
   </tbody>
 </table>

@@ -35,6 +35,17 @@
                   <li><strong><%= t('plugin.ecommerce.table.sandbox') %>:</strong> <span> <%= @payment_method.options[:paypal_sandbox].to_s.to_bool ? 'Yes' : 'No'  %></span></li>
                 </ul>
               <% end  %>
+
+              <% if @payment_method.options[:type] == 'credit_card' %>
+                <h3><%= t('plugin.ecommerce.method_credit_card') %></h3>
+                <ul class="ec-list-orders-address">
+                  <li><strong><%= t('plugin.ecommerce.table.login') %>:</strong> <span> <%= @payment_method.options[:cc_paypal_login]  %></span></li>
+                  <li><strong><%= t('plugin.ecommerce.table.password') %>:</strong> <span> <%= @payment_method.options[:cc_paypal_password]  %></span></li>
+                  <li><strong><%= t('plugin.ecommerce.table.signature') %>:</strong> <span> <%= @payment_method.options[:cc_paypal_signature]  %></span></li>
+                  <li><strong><%= t('plugin.ecommerce.table.sandbox') %>:</strong> <span> <%= @payment_method.options[:cc_paypal_sandbox].to_s.to_bool ? 'Yes' : 'No'  %></span></li>
+                </ul>
+              <% end  %>
+
               <% if @payment_method.options[:type] == 'bank_transfer' %>
                 <h3><%= t('plugin.ecommerce.method_bank_transfer') %></h3>
                 <ul class="ec-list-orders-address">

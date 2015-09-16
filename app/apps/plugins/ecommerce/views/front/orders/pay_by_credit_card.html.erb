@@ -1,3 +1,4 @@
+<%= render layout: "ecommerce/views/layouts/ecommerce", locals: {} do %>
 <%= form_tag(plugins_ecommerce_order_pay_by_credit_card_path(order: @order.slug), :method => "post", :class => "form", id: 'payment-form') do %>
 
     <div class="row">
@@ -126,3 +127,5 @@
     margin-top: 2px;
   }
 </style>
+
+<% end %>

@@ -409,7 +409,6 @@ module Plugins::ExportContent::ExportContentHelper
   end
 
   def save_field_values(object, values)
-    return unless values.present?
     values.each do |fv|
       object.save_field_value(fv[:custom_field_slug], fv[:value], fv[:term_order], false)
     end

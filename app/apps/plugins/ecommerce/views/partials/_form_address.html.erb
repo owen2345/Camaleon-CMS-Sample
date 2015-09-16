@@ -7,16 +7,16 @@
 
     <div class="form-group">
         <label for=""><%= t('plugin.ecommerce.table.firstname') %></label>
-        <%= text_field_tag 'order[billing_address][first_name]', billing_address[:first_name], class: 'form-control' %>
+        <%= text_field_tag 'order[billing_address][first_name]', billing_address[:first_name], class: 'form-control required' %>
 
     </div>
     <div class="form-group">
         <label for=""><%= t('plugin.ecommerce.table.lastname') %></label>
-        <%= text_field_tag 'order[billing_address][last_name]',billing_address[:last_name], class: 'form-control' %>
+        <%= text_field_tag 'order[billing_address][last_name]',billing_address[:last_name], class: 'form-control required' %>
     </div>
     <div class="form-group">
         <label for=""><%= t('plugin.ecommerce.table.address') %></label>
-        <%= text_field_tag 'order[billing_address][address1]',billing_address[:address1], class: 'form-control' %>
+        <%= text_field_tag 'order[billing_address][address1]',billing_address[:address1], class: 'form-control required' %>
     </div>
     <div class="form-group">
         <label for=""><%= t('plugin.ecommerce.table.address') %> 2</label>
@@ -24,7 +24,7 @@
     </div>
     <div class="form-group">
         <label for=""><%= t('plugin.ecommerce.table.city') %></label>
-        <%= text_field_tag 'order[billing_address][city]',billing_address[:city], class: 'form-control' %>
+        <%= text_field_tag 'order[billing_address][city]',billing_address[:city], class: 'form-control required' %>
     </div>
     <div class="form-group">
         <label for=""><%= t('plugin.ecommerce.table.country') %></label>
@@ -44,21 +44,21 @@
 <div id="shipping_address" class="col-md-6">
     <h3>
         <%= t('plugin.ecommerce.shipping_address') %>
-        <a href="#" id="copy">copy from billing</a>
+        <a href="#" id="ec_copy">copy from billing</a>
     </h3>
 
     <div class="form-group">
         <label for=""><%= t('plugin.ecommerce.table.firstname') %></label>
-        <%= text_field_tag 'order[shipping_address][first_name]', shipping_address[:first_name], class: 'form-control' %>
+        <%= text_field_tag 'order[shipping_address][first_name]', shipping_address[:first_name], class: 'form-control required' %>
 
     </div>
     <div class="form-group">
         <label for=""><%= t('plugin.ecommerce.table.lastname') %></label>
-        <%= text_field_tag 'order[shipping_address][last_name]', shipping_address[:last_name], class: 'form-control' %>
+        <%= text_field_tag 'order[shipping_address][last_name]', shipping_address[:last_name], class: 'form-control required' %>
     </div>
     <div class="form-group">
         <label for=""><%= t('plugin.ecommerce.table.address') %></label>
-        <%= text_field_tag 'order[shipping_address][address1]', shipping_address[:address1], class: 'form-control' %>
+        <%= text_field_tag 'order[shipping_address][address1]', shipping_address[:address1], class: 'form-control required' %>
     </div>
     <div class="form-group">
         <label for=""><%= t('plugin.ecommerce.table.address') %> 2</label>
@@ -66,7 +66,7 @@
     </div>
     <div class="form-group">
         <label for=""><%= t('plugin.ecommerce.table.city') %></label>
-        <%= text_field_tag 'order[shipping_address][city]', shipping_address[:city], class: 'form-control' %>
+        <%= text_field_tag 'order[shipping_address][city]', shipping_address[:city], class: 'form-control required' %>
     </div>
     <div class="form-group">
         <label for=""><%= t('plugin.ecommerce.table.country') %></label>

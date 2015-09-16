@@ -66,3 +66,8 @@
 </div>
 
 <% add_asset_library('datepicker')  %>
+<script>
+  run.push(function(){
+    jQuery( '#form-coupon' ).on( "change", 'input[type="number"], #options_min_cart_total', function() {setTimeout(function(){jQuery(this).val(Math.abs(jQuery(this).val()) || 0);}.bind(this), 60)});
+  })
+</script>

@@ -1,3 +1,4 @@
+<%= render layout: "ecommerce/views/layouts/ecommerce", locals: {} do %>
 <%= form_tag(plugins_ecommerce_order_pay_by_bank_transfer_path(order: @order.slug), :method => "post", :class => "form") do %>
 
     <div class="row">
@@ -60,5 +61,7 @@
         </div>
       </div>
     </div>
+
+<% end %>
 
 <% end %>
