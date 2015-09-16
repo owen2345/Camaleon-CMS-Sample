@@ -41,7 +41,7 @@ module Plugins::SocialLogin::SocialLoginHelper
     if !ActiveRecord::Base.connection.column_exists?(:plugins_social_logins, :site_id, :integer)
       ActiveRecord::Base.connection.add_column("plugins_social_logins", "site_id", "integer")
     end
-    flash[:alert] = "Please restart your server to work correctly."
+
   end
 
   # here all actions on going to inactive

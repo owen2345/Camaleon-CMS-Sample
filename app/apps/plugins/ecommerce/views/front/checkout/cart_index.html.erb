@@ -1,3 +1,4 @@
+<%= render layout: "ecommerce/views/layouts/ecommerce", locals: {} do %>
 <h2>Shopping Cart</h2>
 <%= form_tag(plugins_ecommerce_checkout_cart_update_path, :method => "post", :class => "form") do %>
     <table id="table-shopping-cart" class="table">
@@ -52,5 +53,7 @@
             <a class="btn btn-info" href="<%= plugins_ecommerce_checkout_path %>"><i class="fa fa-shopping-cart"></i> Proceed to Checkout</a>
         </div>
     <% end %>
+
+<% end %>
 
 <% end %>

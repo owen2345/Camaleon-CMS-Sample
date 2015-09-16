@@ -22,5 +22,4 @@ class Plugins::Ecommerce::Models::ShippingMethod < TermTaxonomy
     price_total.to_f
   end
 
-
 end

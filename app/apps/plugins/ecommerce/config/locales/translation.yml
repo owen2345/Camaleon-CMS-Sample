@@ -59,6 +59,7 @@
         shipped: 'Shipped'
         updated: 'Updated'
       method_paypal: 'Method by Paypal'
+      method_credit_card: 'Method by Credit Card'
       method_bank_transfer: 'Method Bank Transfer'
       method_shipped: 'Method Shipped'
       new: 'New'
@@ -159,6 +160,7 @@
         username_login: 'Username / Login'
         used_applications: 'Used applications'
         code_zip: 'Code Zip'
+        method_type: 'Method type'
       tax_rates: 'Tax Rates'
 es:
   plugin:
@@ -221,6 +223,7 @@ es:
         shipped: 'Enviado'
         updated: 'Actualizado'
       method_paypal: 'Método por Paypal'
+      method_credit_card: 'Método por Tarjeta de Credito'
       method_bank_transfer: 'Método Transferencia Bancaria'
       method_shipped: 'Método de Envío'
       new: 'Nuevo'
@@ -323,5 +326,6 @@ es:
         username_login: 'Nombre Usuario / Inicio Sesión'
         used_applications: 'Aplicaciones Usadas'
         code_zip: 'Código Postal'
+        method_type: 'Tipo de metodo'
       tax_rates: 'Tasas de Impuesto'
 

@@ -40,6 +40,8 @@ class Plugins::Ecommerce::Models::OrderDecorator < TermTaxonomyDecorator
       "<span class='label label-success'>#{I18n.t('plugin.ecommerce.select.received')}</span>"
     elsif object.canceled?
       "<span class='label label-default'>#{I18n.t('plugin.ecommerce.select.canceled')}</span>"
+    elsif object.meta[:payment][:coupon].to_s.parameterize == 'free'
+      "<span class='label label-success'>Free</span>"
     else
       "<span class='label label-danger'>#{I18n.t('plugin.ecommerce.select.unpaid')}</span>"
     end

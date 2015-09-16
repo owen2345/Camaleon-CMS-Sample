@@ -1,6 +1,8 @@
+<%= render layout: "ecommerce/views/layouts/ecommerce", locals: {} do %>
+
 <%= form_tag(plugins_ecommerce_order_set_select_payment_path(order: @order.slug), :method => "post", :class => "form") do %>
 
-<div id="payment" class="col-md-8 col-md-offset-2">
+<div id="payment" class="col-md-7">
   <h3>Payment</h3>
   <% @payment_methods = current_site.payment_methods.actives.all %>
 
@@ -8,19 +10,15 @@
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-      <% @payment_methods.each_with_index do |payment, index|
-        bool_active = @order.meta[:payment][:type].present? ? @order.meta[:payment][:type] == payment.options[:type] : index == 0
-      %>
-          <li role="presentation" class="<%= "active" if bool_active %>"><a href="#<%= payment.slug %>" aria-controls="<%= payment.slug %>" role="tab" data-toggle="tab"><%= payment.name %></a></li>
+      <% @payment_methods.each_with_index do |payment, index| %>
+          <li role="presentation" class="<%= "active" if index == 0 %>"><a href="#<%= payment.slug %>" aria-controls="<%= payment.slug %>" role="tab" data-toggle="tab"><%= payment.name %></a></li>
       <% end %>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
-      <% @payment_methods.each_with_index do |payment, index|
-      bool_active = @order.meta[:payment][:type].present? ? @order.meta[:payment][:type] == payment.options[:type] : index == 0
-      %>
-          <div role="tabpanel" class="tab-pane <%= "active" if bool_active %>" id="<%= payment.slug %>">
+      <% @payment_methods.each_with_index do |payment, index|  %>
+          <div role="tabpanel" class="tab-pane <%= "active" if index == 0 %>" id="<%= payment.slug %>">
 
             <input type="hidden" name="payment[payment_id]" value="<%= payment.id  %>">
             <% if payment.options[:type] == 'paypal' %>
@@ -57,5 +55,10 @@
 
 
 </div>
+<div class="col-md-5">
+  <h3>Products and Payments</h3>
+  <%= render partial: 'ecommerce/views/partials/table_order_products', locals: {order: @order} %>
+</div>
+<% end %>
 
 <% end %>

@@ -30,7 +30,7 @@ class Plugins::Ecommerce::Models::CouponDecorator < TermTaxonomyDecorator
       when 'money'
         "#{the_symbol} #{opts[:amount].to_f}"
       else
-        "Free Shipping"
+        "Free"
     end
   end
 

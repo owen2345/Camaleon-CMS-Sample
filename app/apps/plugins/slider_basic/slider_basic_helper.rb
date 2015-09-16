@@ -56,7 +56,10 @@ module Plugins::SliderBasic::SliderBasicHelper
 
   # Mios
   def slider_basic_app_before_load
-
+    Site.class_eval do
+      #attr_accessible :my_id
+      has_many :slider_basics, :class_name => "Plugins::SliderBasic::Models::SliderBasic", foreign_key: :site_id, dependent: :destroy
+    end
   end
 
   def slider_basic_front_before_load

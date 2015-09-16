@@ -21,6 +21,7 @@
             <tr>
               <th id=""><%= t('plugin.ecommerce.table.id') %></th>
               <th id=""><%= t('plugin.ecommerce.table.name') %></th>
+              <th id=""><%= t('plugin.ecommerce.table.method_type') %></th>
               <th id=""><%= t('plugin.ecommerce.table.status') %></th>
               <th id=""><%= t('plugin.ecommerce.table.description') %></th>
               <th><%= t('plugin.ecommerce.table.actions') %></th>
@@ -34,6 +35,7 @@
                 <tr>
                   <td><%= row.slug %></td>
                   <td><%= row.name %></td>
+                  <td><%= row.method_text %></td>
                   <td><%= raw row.the_status %></td>
                   <td><%= row.description  %></td>
                   <td>

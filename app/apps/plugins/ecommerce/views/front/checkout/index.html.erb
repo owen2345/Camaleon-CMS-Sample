@@ -1,3 +1,4 @@
+<%= render layout: "ecommerce/views/layouts/ecommerce", locals: {} do %>
 <%
    warning = []
    warning << "Not Found Product" if @products.size == 0
@@ -6,7 +7,7 @@
 <div id="checkout" class="row">
   <h1 class="col-md-12">Checkout</h1>
 
-  <%= form_tag(plugins_ecommerce_checkout_processing_path, :method => "post", :class => "form") do %>
+  <%= form_tag(plugins_ecommerce_checkout_processing_path, :method => "post", :class => "form form-validate-ec") do %>
 
     <div id="user_details" class="col-md-12">
       <h3>User Details</h3>
@@ -14,11 +15,11 @@
       <input class="form-control" type="hidden" name="order[details][customer]" value="<%= current_user.fullname %>">
       <div class="form-group">
         <label for="">Email</label>
-        <input class="form-control" type="text" name="order[details][email]" id="">
+        <input class="form-control required" type="email" name="order[details][email]" id="">
       </div>
       <div class="form-group">
         <label for="">Phone</label>
-        <input class="form-control" type="text" name="order[details][phone]" id="">
+        <input class="form-control required" type="text" name="order[details][phone]" id="">
       </div>
     </div>
 
@@ -136,17 +137,18 @@
         </td>
       </tr>
       <% total += tax_total %>
+
+      <tr id="coupon_application_row" style="display:none;">
+        <td colspan="2"></td>
+        <td colspan="2" class="text-right">Discount</td>
+        <td class="extra_totals reduce_tax_subtotal" id="coupon_application_total" data-amount="0">
+          <span></span>
+        </td>
+      </tr>
       <tr>
         <td colspan="2"></td>
         <td colspan="2" class="text-right">Shipping</td>
         <td id="shipping_total"><%= current_site.current_unit %> <span><%= weight_price %></span></td>
-      </tr>
-      <tr id="coupon_application_row" style="display:none;">
-        <td colspan="2"></td>
-        <td colspan="2" class="text-right">Discount</td>
-        <td class="extra_totals reduce_tax_subtotal" id="coupon_application_total">
-          <span></span>
-        </td>
       </tr>
       <tr>
         <td colspan="2"></td>
@@ -161,4 +163,4 @@
   </div>
   <% end %>
 </div>
-
+<% end %>

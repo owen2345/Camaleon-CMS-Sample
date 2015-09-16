@@ -17,6 +17,7 @@ class Plugins::Ecommerce::Front::CheckoutController < Plugins::Ecommerce::FrontC
       flash[:notice] = "Not found products."
       redirect_to action: :cart_index
     end
+    @ecommerce_bredcrumb << ["Checkout"]
   end
 
   def processing
@@ -69,7 +70,7 @@ class Plugins::Ecommerce::Front::CheckoutController < Plugins::Ecommerce::FrontC
             pay_status = 'received'
             coupon_amount = payment_amount
           when 'percent'
-            coupon_amount = payment_amount * opts[:amount].to_f / 100
+            coupon_amount = sub_total * opts[:amount].to_f / 100
           when 'money'
             coupon_amount = opts[:amount].to_f
         end
@@ -112,6 +113,7 @@ class Plugins::Ecommerce::Front::CheckoutController < Plugins::Ecommerce::FrontC
 
   def cart_index
     @products = @cart.products
+    @ecommerce_bredcrumb << ["Shopping Cart"]
   end
 
   # params[cart]: product_id,  qty
@@ -146,7 +148,12 @@ class Plugins::Ecommerce::Front::CheckoutController < Plugins::Ecommerce::FrontC
 
   private
   def set_cart
-    @cart = current_site.carts.set_user(current_user).first_or_create(name: "Cart by #{current_user.id}")
+    if signin?
+      @cart = current_site.carts.set_user(current_user).first_or_create(name: "Cart by #{current_user.id}")
+    else
+      cookies[:return_to] = request.referer
+      redirect_to admin_login_path
+    end
   end
 
 
