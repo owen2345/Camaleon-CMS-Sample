@@ -12,6 +12,6 @@
         "blog",
         "content management system"
     ],
-    "scripts": { "postdeploy": "bundle install; rake db:migrate RAILS_ENV=production" },
+    "scripts": { "postdeploy": "bundle install; RAILS_ENV=production rake db:migrate" },
     "generator": "https://www.expeditedssl.com/heroku-button-maker"
 }
