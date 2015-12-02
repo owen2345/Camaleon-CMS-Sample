@@ -44,7 +44,10 @@ group :development, :test do
 end
 
 # gem 'camaleon_cms', :git => 'https://github.com/owen2345/camaleon-cms-gem.git'
-gem 'camaleon_cms', '~> 0.1.2'
+gem "camaleon_cms"#, path: "/www/rails/camaleon-gem/camaleon-cms-gem"
+gem "camaleon_post_clone", github: "owen2345/camaleon-post-clone"
+gem "camaleon_post_order", github: 'owen2345/camaleon-post-order-plugin'
+gem 'camaleon_ecommerce', github:  'owen2345/camaleon-ecommerce'
 
 
 #################### Camaleon CMS include all gems for plugins and themes #################### 
