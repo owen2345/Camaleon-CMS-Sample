@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: camaleon_sample_development
+  database: cama-gem
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: camaleon_sample_test
+  database: camaleon_sample
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: camaleon_sample_production
-  username: camaleon_sample
-  password: <%= ENV['CAMALEON_SAMPLE_DATABASE_PASSWORD'] %>
+  database: cama-gem
+  username: owen
+  password: root
